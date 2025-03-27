@@ -1,6 +1,11 @@
 <template>
     <section>
-
+<!--         <div class="search-filter p-4">
+            <input type="text" id="search" class="text-white ml-2 p-2 rounded-3xl border-2 border-blue-400" 
+            placeholder="Search by title"
+            v-model="searchQuery"
+            />
+        </div> -->
         <div class="heroSection">
             <div class="heroContainerText pl-10 pt-45">
                 <h1 class="text-4xl text-amber-50 font-bold">{{ movies[2].title }}</h1>
@@ -38,14 +43,6 @@
                 <option value="Animation">Animation</option>
                 <option value="Horror">Horror</option>
             </select>
-        </div>
-
-        <div class="search-filter p-4">
-            <label for="search" class="text-white">Search by title:</label>
-            <input type="text" id="search" class="text-white ml-2 p-2 rounded" 
-            placeholder="Search by title"
-            v-model="searchQuery"
-            />
         </div>
 
     </section>

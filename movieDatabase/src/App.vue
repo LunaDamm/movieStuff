@@ -55,27 +55,31 @@ nav a:first-of-type {
 @media (min-width: 1024px) {
   header {
     display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
+
+    /* justify-content: space-between; */
+    /* padding-right: calc(var(--section-gap) / 2); */
   }
 
   .logo {
-    margin: 0 2rem 0 0;
+    margin: 0 1rem 0 0;
   }
 
   header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: 5fr 1fr;
+    /* display: flex; */
+    /* justify-content: space-between; */
+    /* place-items: flex-start; */
+    /* flex-wrap: wrap; */
   }
 
-  nav {
+/*   nav {
     text-align: left;
     margin-left: -1rem;
     font-size: 1rem;
 
     padding: 1rem 0;
     margin-top: 1rem;
-  }
+  } */
 }
 </style>
