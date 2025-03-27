@@ -17,7 +17,7 @@
 
         <div class="movieCardsRow flex flex-wrap justify-center relative gap-4 z-10 !-mt-20">
 <!--             movie card repeat -->
-            <div @mouseenter="toggleMovieData(index)" @mouseleave="toggleMovieData(index)" class="movieCard relative w-1/4 h-120 flex flex-col justify-end text-white" v-for="(movie, index) in movies" :key="movie">
+            <div @mouseenter="toggleMovieData(index)" @mouseleave="toggleMovieData(index)" class="movieCard relative w-1/4 h-120 flex flex-col justify-end text-white" v-for="(movie, index) in filteredMovies" :key="movie">
                 <div class= "bg-gradient-to-b to-gray-900 p-5">
                     <h2 class="text-2xl !font-bold">{{ movie.title }}</h2>
                     <img class="absolute inset-0 -z-1 bg-cover bg-center w-full h-full" :src="movie.movieCover" alt=""> 
@@ -31,17 +31,55 @@
             </div>
             <!-- movie card end repeat -->
         </div>
+        <div class="genre-filter p-4">
+            <label for="genre" class="text-white">Filter by genre</label>
+            <select id="genre" class="ml-2 p-2 rounded" v-model="selectedGenre">
+                <option value="">All</option>
+                <option value="Animation">Animation</option>
+                <option value="Horror">Horror</option>
+            </select>
+        </div>
+
+        <div class="search-filter p-4">
+            <label for="search" class="text-white">Search by title:</label>
+            <input type="text" id="search" class="text-white ml-2 p-2 rounded" 
+            placeholder="Search by title"
+            v-model="searchQuery"
+            />
+        </div>
 
     </section>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 
 // destructuring the useMovieDatabase function
 import { useMovieDatabase } from '../modules/useMovieDatabase.js'
 
 const { movies } = useMovieDatabase()
+
+const selectedGenre = ref('')
+const searchQuery = ref('')
+
+/* const filteredMovies = computed(() => {
+    return selectedGenre.value 
+    ? movies.value.filter((movie) => movie.genre === selectedGenre.value)
+    : movies.value
+}) */
+
+const filteredMovies = computed(() => {
+    let result = selectedGenre.value
+    ? movies.value.filter((movie) => movie.genre === selectedGenre.value)
+    : movies.value
+
+    if(searchQuery.value) {
+        result = result.filter((movie) => 
+            movie.title.toLowerCase().includes(searchQuery.value.toLowerCase()))
+    }
+    
+    return result
+})
 
 let isMovieDataVisible = ref([])
 
@@ -62,9 +100,4 @@ const toggleMovieData = (index) => {
     background-size: cover;
     background-repeat: no-repeat;
 } 
-
-.fade-effect {
-
-}
-
 </style>
