@@ -23,6 +23,7 @@
         <div class="movieCardsRow flex flex-wrap justify-center relative gap-4 z-10 !-mt-20">
 <!--             movie card repeat -->
             <div @mouseenter="toggleMovieData(index)" @mouseleave="toggleMovieData(index)" class="movieCard relative w-1/4 h-120 flex flex-col justify-end text-white" v-for="(movie, index) in filteredMovies" :key="movie">
+                <router-link :to="`/movies/${movie.id}`" class="!text-white">
                 <div class= "bg-gradient-to-b to-gray-900 p-5">
                     <h2 class="text-2xl !font-bold">{{ movie.title }}</h2>
                     <img class="absolute inset-0 -z-1 bg-cover bg-center w-full h-full" :src="movie.movieCover" alt=""> 
@@ -31,8 +32,8 @@
                         <p>{{ movie.genre }}</p>
                         <p>Rating: {{ movie.rating }}</p>
                     </div>
-
                 </div>
+            </router-link>
             </div>
             <!-- movie card end repeat -->
         </div>
